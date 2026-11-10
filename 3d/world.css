@@ -122,10 +122,10 @@ body:not(.loaded) .caption span { animation-play-state: paused; }
 }
 
 #p-contact { right: calc(var(--pad) + 150px); bottom: 64px; width: min(520px, 42vw); display: grid; justify-items: end; gap: 12px; text-align: right; }
-#p-contact h2 { font-size: clamp(42px, 5.2vw, 88px); text-transform: uppercase; }
+#p-contact h2 { font-size: clamp(42px, 5.2vw, 74px); text-transform: uppercase; }
 #p-contact em { color: var(--accent); }
-#p-contact p { color: var(--mute); max-width: 36ch; }
-#p-contact .contact-mail { margin-top: 8px; }
+#p-contact p { color: var(--mute); }
+#p-contact .contact-mail { margin-top: 8px; white-space: nowrap; overflow-wrap: normal; font-size: min(36px, 2.8vw); }
 #p-contact .socials { justify-content: end; margin-top: 4px; }
 
 .case { display: grid; gap: 26px; }
@@ -146,5 +146,6 @@ body:not(.loaded) .caption span { animation-play-state: paused; }
   #p-about { top: auto; bottom: 44px; translate: none; width: auto; right: var(--pad); }
   #s-list p, #tools, #code { display: none; }
   #p-contact { right: var(--pad); left: var(--pad); width: auto; }
+  #p-contact .contact-mail { font-size: min(26px, 6.4vw); }
   .case-grid { grid-template-columns: 1fr; }
 }

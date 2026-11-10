@@ -38,7 +38,7 @@ window.SITE = {
       thumb: "https://i.ytimg.com/vi/qFRErBEHR60/maxres1.jpg", video: "https://youtu.be/qFRErBEHR60",
       media: ["assets/projets/motion-design/storyboard.jpg"] },
     { title: "Europe en 2100", category: "audiovisuel", year: 2026, role: "Réalisation complète : tournage et montage",
-      description: "La publicité d'Europe en 2100, un jeu de cartes fictif. J'en ai assuré toute la réalisation. Le jeu devait être fini, et sa version physique prête, avant qu'on puisse filmer : j'ai donc tourné la veille de l'oral de présentation, puis monté toute la pub dans la soirée.",
+      description: "La publicité d'Europe en 2100, un jeu de cartes fictif. J'en ai assuré toute la réalisation. Le jeu devait être fini, et sa version physique prête, avant qu'on puisse filmer : j'ai donc tourné la veille de l'oral de présentation, puis monté toute la pub dans la soirée. Ne te fie pas au début de la vidéo : c'est un piège, et il est voulu.",
       tagline: "Une pub tournée en vingt minutes, montée en une soirée.", tools: "CapCut, Premiere Pro",
       challenge: "Tout boucler la veille de l'oral : un tournage de vingt minutes avec des moyens très limités, puis le montage complet en une soirée.",
       thumb: "", video: "https://youtu.be/5sEIh1vjJG0" },
@@ -73,7 +73,7 @@ window.SITE = {
     { title: "Graphisme & DA", text: "La direction artistique et les visuels qui accompagnent les vidéos, sur Photoshop, Illustrator et Figma." },
   ],
 
-  tools: ["Premiere Pro", "After Effects", "DaVinci Resolve", "CapCut", "Photoshop", "Illustrator", "Figma", "InDesign (notions)"],
+  tools: ["Premiere Pro", "After Effects", "DaVinci Resolve", "CapCut", "Photoshop", "Illustrator", "Figma", "InDesign", "WordPress"],
 
   code: "Du vibe coding : assez pour suivre une équipe de devs et trouver des solutions avec elle.",
 
@@ -88,7 +88,7 @@ window.SITE = {
     plongee: "Sous la surface, il y a des histoires.",
     roles: ["Monteur", "Vidéaste", "Graphiste"],
     about: "Du rush au récit.",
-    contact: "On lance la lecture ?",
-    contactText: "Un stage, un projet, un clip à monter : écris-moi.",
+    contact: "On lance la lecture ?",
+    contactText: "Un stage, un projet, un clip à monter : écris-⁠moi.",
   },
 };
