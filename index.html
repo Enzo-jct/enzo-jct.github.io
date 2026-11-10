@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enzo Jacinto — Graphisme, audiovisuel, réseaux</title>
+  <meta name="description" content="Portfolio d'Enzo Jacinto : graphisme, courts métrages et contenus pour les réseaux sociaux.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="data/content.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/scene.js" defer></script>
+</head>
+<body>
+  <div class="loader" aria-hidden="true">
+    <span class="label">Mise au point</span>
+    <strong id="loader-count">000</strong>
+    <div class="loader-bar"><i id="loader-bar"></i></div>
+  </div>
+
+  <header class="top">
+    <a class="logo" href="#top" aria-label="Haut de page">EJ</a>
+    <div class="info"><span class="label">Actuellement</span><span data-bind="status"></span></div>
+    <div class="info"><span class="label">Basé à</span><span><span data-bind="city"></span> (<time id="clock"></time>)</span></div>
+    <nav class="info"><span class="label">Navigation</span><span><a href="#travaux">Travaux</a>, <a href="#services">Services</a>, <a href="#contact">Contact</a></span></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-stage" aria-hidden="true"></div>
+      <p class="hero-intro" data-bind="intro"></p>
+      <div class="hero-actions">
+        <button class="pill" id="showreel" hidden>Voir le showreel <span aria-hidden="true">▶</span></button>
+        <a class="pill" href="#travaux">Voir les travaux <span aria-hidden="true">↓</span></a>
+      </div>
+      <h1 class="hero-name" id="name"></h1>
+    </section>
+
+    <section class="manifesto">
+      <p id="manifesto"></p>
+    </section>
+
+    <section class="stats">
+      <ul id="stats"></ul>
+    </section>
+
+    <section class="work" id="travaux">
+      <div class="section-head">
+        <h2 class="fade">Travaux<sup id="work-count"></sup></h2>
+        <div class="filters" id="filters"></div>
+      </div>
+      <ol class="work-list" id="work-list"></ol>
+    </section>
+
+    <section class="services" id="services">
+      <h2 class="fade">Ce que<br>je fais.</h2>
+      <div>
+        <ol class="services-list" id="services-list"></ol>
+        <div class="tools fade"><span class="label">Outils</span><p id="tools"></p></div>
+        <div class="tools code fade"><span class="label">Code</span><p id="code"></p></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2 class="fade">Un projet ?<br><em>Parlons-en.</em></h2>
+      <a class="contact-mail fade" id="mail"></a>
+      <ul class="socials" id="socials"></ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span id="copy"></span>
+    <a href="#top">Haut de page ↑</a>
+  </footer>
+
+  <div class="preview" id="preview" aria-hidden="true"></div>
+  <div class="af" id="af" aria-hidden="true"></div>
+
+  <dialog class="viewer" id="viewer">
+    <button class="viewer-close" id="viewer-close" aria-label="Fermer">✕</button>
+    <div id="viewer-body"></div>
+  </dialog>
+</body>
+</html>
