@@ -3,80 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Enzo Jacinto — Graphisme, audiovisuel, réseaux</title>
-  <meta name="description" content="Portfolio d'Enzo Jacinto : graphisme, courts métrages et contenus pour les réseaux sociaux.">
+  <title>Enzo Jacinto — La plongée</title>
+  <meta name="description" content="Portfolio d'Enzo Jacinto en 3D : une plongée, de la surface de l'océan jusqu'aux abysses, à travers ses projets.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <script src="data/content.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/scene.js" defer></script>
+  <link rel="stylesheet" href="3d/world.css">
+  <script src="data/content.js"></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+  <script src="3d/world.js" type="module"></script>
 </head>
 <body>
-  <div class="loader" aria-hidden="true">
-    <span class="label">Mise au point</span>
-    <strong id="loader-count">000</strong>
-    <div class="loader-bar"><i id="loader-bar"></i></div>
+  <div class="loader">
+    <div class="load">
+      <div class="load-line"><i id="loader-bar"></i></div>
+      <div class="load-go">
+        <button class="load-enter" id="enter" disabled>Plonger</button>
+        <button class="load-mute" id="enter-mute" disabled>ou entrer sans le son</button>
+      </div>
+      <span class="label load-hint">Son immersif · casque conseillé</span>
+    </div>
+    <a class="label load-lite" href="lite.html">Version lite</a>
   </div>
 
-  <header class="top">
-    <a class="logo" href="#top" aria-label="Haut de page">EJ</a>
-    <div class="info"><span class="label">Actuellement</span><span data-bind="status"></span></div>
-    <div class="info"><span class="label">Basé à</span><span><span data-bind="city"></span> (<time id="clock"></time>)</span></div>
-    <nav class="info"><span class="label">Navigation</span><span><a href="#travaux">Travaux</a>, <a href="#services">Services</a>, <a href="#contact">Contact</a></span></nav>
+  <header class="bar">
+    <a class="logo" href="#" data-k="0" aria-label="Retour au début">EJ</a>
+    <span class="bar-name"><span data-bind="name"></span> — portfolio</span>
+    <div class="bar-right">
+      <div class="sound">
+        <button class="sound-btn" id="sound" aria-pressed="false">Son <span aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+        <input class="volume" id="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume du site">
+      </div>
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu <span aria-hidden="true">···</span></button>
+      <nav class="menu" id="menu" hidden></nav>
+    </div>
   </header>
+  <nav class="rail" id="rail" aria-label="Chapitres"></nav>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-stage" aria-hidden="true"></div>
-      <p class="hero-intro" data-bind="intro"></p>
-      <div class="hero-actions">
-        <button class="pill" id="showreel" hidden>Voir le showreel <span aria-hidden="true">▶</span></button>
-        <a class="pill" href="#travaux">Voir les travaux <span aria-hidden="true">↓</span></a>
-      </div>
-      <h1 class="hero-name" id="name"></h1>
+  <main class="world">
+    <section class="panel" id="p-surface">
+      <span class="label">Portfolio</span>
+      <h1 data-bind="name"></h1>
+      <p class="roles" id="roles"></p>
+      <span class="label hint">Fais défiler pour plonger ↓</span>
     </section>
 
-    <section class="manifesto">
-      <p id="manifesto"></p>
+    <section class="panel" id="p-dive"><p class="caption" id="caption"></p></section>
+
+    <section class="panel" id="p-work">
+      <div class="filters" id="filters" role="group" aria-label="Trier les projets"></div>
+      <span class="label" id="w-num"></span>
+      <h2 id="w-title"></h2>
+      <span class="label" id="w-meta"></span>
+      <button class="pill" id="w-open">Voir le projet <span aria-hidden="true">↗</span></button>
     </section>
 
-    <section class="stats">
-      <ul id="stats"></ul>
+    <section class="panel" id="p-about">
+      <span class="label">À propos</span>
+      <h2 id="about-title"></h2>
+      <p class="roles" id="about-roles"></p>
+      <p class="about-text" data-bind="intro"></p>
+      <ol id="s-list"></ol>
+      <p class="about-code" id="code"></p>
+      <span class="label" id="tools"></span>
     </section>
 
-    <section class="work" id="travaux">
-      <div class="section-head">
-        <h2 class="fade">Travaux<sup id="work-count"></sup></h2>
-        <div class="filters" id="filters"></div>
-      </div>
-      <ol class="work-list" id="work-list"></ol>
-    </section>
-
-    <section class="services" id="services">
-      <h2 class="fade">Ce que<br>je fais.</h2>
-      <div>
-        <ol class="services-list" id="services-list"></ol>
-        <div class="tools fade"><span class="label">Outils</span><p id="tools"></p></div>
-        <div class="tools code fade"><span class="label">Code</span><p id="code"></p></div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <h2 class="fade">Un projet ?<br><em>Parlons-en.</em></h2>
-      <a class="contact-mail fade" id="mail"></a>
+    <section class="panel" id="p-contact">
+      <span class="label">Contact</span>
+      <h2 id="contact-title"></h2>
+      <p id="contact-text"></p>
+      <a class="contact-mail" id="mail"></a>
       <ul class="socials" id="socials"></ul>
+      <span class="label"><span id="copy"></span> · <a href="lite.html">Version lite</a></span>
     </section>
   </main>
 
-  <footer class="foot">
-    <span id="copy"></span>
-    <a href="#top">Haut de page ↑</a>
-  </footer>
-
-  <div class="preview" id="preview" aria-hidden="true"></div>
-  <div class="af" id="af" aria-hidden="true"></div>
+  <div class="track"></div>
 
   <dialog class="viewer" id="viewer">
     <button class="viewer-close" id="viewer-close" aria-label="Fermer">✕</button>

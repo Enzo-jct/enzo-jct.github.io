@@ -17,7 +17,6 @@ import { buildSound } from "./sound.js";
 const S = window.SITE, P = S.projects, X = S.v3d ?? {};
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const src = (u) => (/^(https?:|\/|data:)/.test(u) ? u : `../${u}`);
 const roles = X.roles ?? Object.values(S.categories);
 
 let ready = false, loadedAt = Infinity;
@@ -92,7 +91,7 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ powerPreference: "high-performance" });
 } catch {
-  location.replace("../");
+  location.replace("lite.html");
   throw new Error("WebGL indisponible");
 }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -130,7 +129,7 @@ const card = (num, title, sub) => paint(1600, 900, (g, W, H) => {
 });
 const ytId = (u) => String(u ?? "").match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)?.[1];
 async function picture(p, i) {
-  const yt = ytId(p.video), urls = p.thumb ? [src(p.thumb)] : yt ? [`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`, `https://i.ytimg.com/vi/${yt}/hqdefault.jpg`] : [];
+  const yt = ytId(p.video), urls = p.thumb ? [p.thumb] : yt ? [`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`, `https://i.ytimg.com/vi/${yt}/hqdefault.jpg`] : [];
   for (const url of urls) {
     try {
       const t = await new THREE.TextureLoader().loadAsync(url);
@@ -221,7 +220,7 @@ let railLinks;
 function drawChapters() {
   const ks = [0, W0, AB, CT];
   $("#rail").innerHTML = CHAPTERS.map((name, i) => `<a href="#" data-k="${ks[i]}" aria-label="${name}"><span>${pad(i + 1)}</span><b>${name}</b></a>`).join("");
-  $("#menu").innerHTML = CHAPTERS.map((name, i) => `<a href="#" data-k="${ks[i]}">${name}</a>`).join("") + '<a href="../">Version lite ↗</a>';
+  $("#menu").innerHTML = CHAPTERS.map((name, i) => `<a href="#" data-k="${ks[i]}">${name}</a>`).join("") + '<a href="lite.html">Version lite ↗</a>';
   railLinks = [...$("#rail").children];
 }
 drawChapters();
@@ -264,10 +263,10 @@ function embed(url) {
   if (yt) return `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
   const vm = url.match(/vimeo\.com\/(\d+)/);
   if (vm) return `<iframe src="https://player.vimeo.com/video/${vm[1]}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-  return `<video src="${esc(src(url))}" controls autoplay playsinline></video>`;
+  return `<video src="${esc(url)}" controls autoplay playsinline></video>`;
 }
 const keyboard = matchMedia("(any-pointer: fine)").matches;
-const game = (p) => `<button class="play" data-src="${esc(p.play)}"${keyboard ? "" : " disabled"}><img src="${esc(src(p.thumb))}" alt="">
+const game = (p) => `<button class="play" data-src="${esc(p.play)}"${keyboard ? "" : " disabled"}><img src="${esc(p.thumb)}" alt="">
     <span class="pill">${keyboard ? 'Jouer ici <span aria-hidden="true">▶</span>' : "Se joue au clavier, sur ordinateur"}</span></button>
   ${p.controls ? `<p class="play-keys">${esc(p.controls)}</p>` : ""}`;
 $("#viewer-body").addEventListener("click", (e) => {
@@ -290,7 +289,7 @@ function openProject(i) {
     </div>
     <p class="case-text">${esc(p.description)}</p>
     ${p.link ? `<a class="pill viewer-link" href="${esc(p.link)}" target="_blank" rel="noopener">Voir en ligne <span aria-hidden="true">↗</span></a>` : ""}
-    <div class="viewer-media">${p.play ? game(p) : ""}${p.video ? embed(p.video) : ""}${(p.media || []).map((m) => `<img src="${esc(src(m))}" alt="" loading="lazy">`).join("")}${!p.play && !p.video && !p.media?.length ? `<img src="${pics[i].img.toDataURL ? pics[i].img.toDataURL("image/jpeg", 0.85) : esc(src(p.thumb))}" alt="">` : ""}</div>
+    <div class="viewer-media">${p.play ? game(p) : ""}${p.video ? embed(p.video) : ""}${(p.media || []).map((m) => `<img src="${esc(m)}" alt="" loading="lazy">`).join("")}${!p.play && !p.video && !p.media?.length ? `<img src="${pics[i].img.toDataURL ? pics[i].img.toDataURL("image/jpeg", 0.85) : esc(p.thumb)}" alt="">` : ""}</div>
     <div class="case-grid">${part("Mon rôle", p.role)}${part("Outils", p.tools)}${part("Le défi", p.challenge)}</div>
     ${list.length > 1 ? '<button class="pill case-next" id="case-next">Projet suivant <span aria-hidden="true">→</span></button>' : ""}
   </div>`;
