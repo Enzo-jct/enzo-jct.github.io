@@ -64,7 +64,7 @@ window.SITE = {
       description: "Un compte anglophone sur les jeux vidéo et les mangas, que j'ai tenu pendant quatre mois en 2024, à 16 ans : 3,8 millions de vues et 450 000 likes. Le principe : repérer une tendance au moment où elle démarre et la décliner tout de suite en format court. Surtout des slideshows, comme les jeux dont l'écran titre change une fois l'histoire finie ou les animés qu'on a tous vus trop jeune, et des guides parodiques pour « ressembler » à un personnage de jeu vidéo. Ici, mes deux vidéos préférées : d'abord mon edit sur Dark Souls III, celui sur lequel j'ai passé le plus de temps, fait pour fêter mes 1 000 abonnés ; puis celle qui a bien percé, où je promets de me coucher tôt avant d'enchaîner un jeu par heure de la nuit, filmée et montée par moi.",
       tagline: "3,8 millions de vues en quatre mois, 100 % en anglais.", tools: "",
       challenge: "Aller vite : repérer une tendance au moment où elle démarre et sortir le bon format avant qu'elle retombe, en anglais, de l'idée jusqu'à l'analyse des performances.",
-      thumb: "https://i.ytimg.com/vi/H2AXYZ3x68E/maxresdefault.jpg", video: ["https://youtu.be/gHkIyIginoM", "https://youtu.be/H2AXYZ3x68E"] },
+      thumb: "https://i.ytimg.com/vi/gHkIyIginoM/maxresdefault.jpg", video: ["https://youtu.be/gHkIyIginoM", "https://youtu.be/H2AXYZ3x68E"] },
   ],
 
   services: [
