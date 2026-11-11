@@ -60,11 +60,11 @@ window.SITE = {
       tagline: "D'un tracteur en jouet à la vigne : l'enfant est devenu vigneron.", tools: "DaVinci Resolve, Premiere Pro",
       challenge: "Raconter une histoire complète en quarante-quatre secondes, en faisant passer l'enfant au vigneron par les transitions.",
       thumb: "assets/projets/ensedune/vignette.jpg", video: "https://youtu.be/0l2j02BS3Kk" },
-    { title: "Compte TikTok", category: "reseaux", year: 2024, role: "Créateur de contenu",
-      description: "Un compte anglophone sur les jeux vidéo et les mangas, tenu pendant quatre mois en 2024 : 3,8 millions de vues et 450 000 likes. Le concept, original : des slideshows qui surfent sur une tendance du moment, appliqués aux personnages de jeux vidéo et de mangas, avec des edits et des montages courts.",
+    { title: "Compte TikTok", category: "reseaux", year: 2024, role: "Tout : concepts, tournage, montage et publication",
+      description: "Un compte anglophone sur les jeux vidéo et les mangas, tenu pendant quatre mois en 2024 : 3,8 millions de vues et 450 000 likes. Le principe : repérer une tendance au moment où elle démarre et la décliner tout de suite en format court. Surtout des slideshows, comme les jeux dont l'écran titre change une fois l'histoire finie ou les animés qu'on a tous vus trop jeune, et des guides parodiques pour « ressembler » à un personnage de jeu vidéo. Ici, mes deux vidéos préférées : celle qui a bien percé, où je promets de me coucher tôt avant d'enchaîner un jeu par heure de la nuit, filmée et montée par moi, puis un edit sur Dark Souls III.",
       tagline: "3,8 millions de vues en quatre mois, 100 % en anglais.", tools: "",
-      challenge: "Tout faire de bout en bout, en anglais : la conception, le montage, la publication et l'analyse des performances.",
-      thumb: "", link: "" },
+      challenge: "Aller vite : repérer une tendance au moment où elle démarre et sortir le bon format avant qu'elle retombe, en anglais, de l'idée jusqu'à l'analyse des performances.",
+      thumb: "https://i.ytimg.com/vi/H2AXYZ3x68E/maxresdefault.jpg", video: ["https://youtu.be/H2AXYZ3x68E", "https://youtu.be/gHkIyIginoM"] },
   ],
 
   services: [

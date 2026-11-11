@@ -258,12 +258,12 @@ function scramble(el, text) {
 let playX = 0, current = 0;
 
 const viewer = $("#viewer");
-function embed(url) {
+function embed(url, auto = 1) {
   const yt = ytId(url);
-  if (yt) return `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  if (yt) return `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=${auto}&rel=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
   const vm = url.match(/vimeo\.com\/(\d+)/);
-  if (vm) return `<iframe src="https://player.vimeo.com/video/${vm[1]}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-  return `<video src="${esc(url)}" controls autoplay playsinline></video>`;
+  if (vm) return `<iframe src="https://player.vimeo.com/video/${vm[1]}?autoplay=${auto}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  return `<video src="${esc(url)}" controls${auto ? " autoplay" : ""} playsinline></video>`;
 }
 const keyboard = matchMedia("(any-pointer: fine)").matches;
 const game = (p) => `<button class="play" data-src="${esc(p.play)}"${keyboard ? "" : " disabled"}><img src="${esc(p.thumb)}" alt="">
@@ -289,7 +289,7 @@ function openProject(i) {
     </div>
     <p class="case-text">${esc(p.description)}</p>
     ${p.link ? `<a class="pill viewer-link" href="${esc(p.link)}" target="_blank" rel="noopener">Voir en ligne <span aria-hidden="true">↗</span></a>` : ""}
-    <div class="viewer-media">${p.play ? game(p) : ""}${p.video ? embed(p.video) : ""}${(p.media || []).map((m) => `<img src="${esc(m)}" alt="" loading="lazy">`).join("")}${!p.play && !p.video && !p.media?.length ? `<img src="${pics[i].img.toDataURL ? pics[i].img.toDataURL("image/jpeg", 0.85) : esc(p.thumb)}" alt="">` : ""}</div>
+    <div class="viewer-media">${p.play ? game(p) : ""}${[].concat(p.video || []).map((u, i) => embed(u, +!i)).join("")}${(p.media || []).map((m) => `<img src="${esc(m)}" alt="" loading="lazy">`).join("")}${!p.play && !p.video && !p.media?.length ? `<img src="${pics[i].img.toDataURL ? pics[i].img.toDataURL("image/jpeg", 0.85) : esc(p.thumb)}" alt="">` : ""}</div>
     <div class="case-grid">${part("Mon rôle", p.role)}${part("Outils", p.tools)}${part("Le défi", p.challenge)}</div>
     ${list.length > 1 ? '<button class="pill case-next" id="case-next">Projet suivant <span aria-hidden="true">→</span></button>' : ""}
   </div>`;

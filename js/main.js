@@ -106,12 +106,12 @@ if (matchMedia("(hover: hover) and (pointer: fine)").matches && !reduce) {
 }
 
 const viewer = $("#viewer");
-function embed(url) {
+function embed(url, auto = 1) {
   const yt = ytId(url);
-  if (yt) return `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&playsinline=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  if (yt) return `<iframe src="https://www.youtube-nocookie.com/embed/${yt}?autoplay=${auto}&rel=0&playsinline=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
   const vm = url.match(/vimeo\.com\/(\d+)/);
-  if (vm) return `<iframe src="https://player.vimeo.com/video/${vm[1]}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-  return `<video src="${esc(url)}" controls autoplay playsinline></video>`;
+  if (vm) return `<iframe src="https://player.vimeo.com/video/${vm[1]}?autoplay=${auto}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  return `<video src="${esc(url)}" controls${auto ? " autoplay" : ""} playsinline></video>`;
 }
 const keyboard = matchMedia("(any-pointer: fine)").matches;
 const game = (p) => `<button class="play" data-src="${esc(p.play)}"${keyboard ? "" : " disabled"}><img src="${esc(p.thumb)}" alt="">
@@ -143,7 +143,7 @@ list.addEventListener("click", (e) => {
       <div class="wide"><dt class="label">Le projet</dt><dd>${esc(p.description)}</dd></div>
     </dl>
     ${p.link ? `<a class="pill viewer-link" href="${esc(p.link)}" target="_blank" rel="noopener">Voir en ligne <span aria-hidden="true">↗</span></a>` : ""}
-    <div class="viewer-media">${p.play ? game(p) : ""}${p.video ? embed(p.video) : ""}${(p.media || []).map((src) => `<img src="${esc(src)}" alt="" loading="lazy">`).join("")}</div>`);
+    <div class="viewer-media">${p.play ? game(p) : ""}${[].concat(p.video || []).map((u, i) => embed(u, +!i)).join("")}${(p.media || []).map((src) => `<img src="${esc(src)}" alt="" loading="lazy">`).join("")}</div>`);
 });
 if (S.showreel) {
   $("#showreel").hidden = false;
