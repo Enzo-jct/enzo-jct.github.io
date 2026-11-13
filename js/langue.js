@@ -8,11 +8,14 @@
   document.documentElement.lang = lang;
   const autre = lang === "fr" ? "en" : "fr";
 
-  const lien = (texte, classe) => {
+  const vers = (l) => {
     const u = new URL(location.href);
-    u.searchParams.set("lang", autre);
+    u.searchParams.set("lang", l);
+    return u.href;
+  };
+  const lien = (texte, classe) => {
     const a = document.createElement("a");
-    a.href = u.href;
+    a.href = vers(autre);
     a.hreflang = a.lang = autre;
     a.textContent = texte;
     if (classe) a.className = classe;
@@ -31,6 +34,19 @@
     const style = document.createElement("style");
     style.textContent = ".lang-btn{color:var(--mute);text-decoration:none;transition:color .3s}.lang-btn:hover{color:var(--ink)}";
     document.head.append(style);
+    const choix = document.getElementById("langue");
+    if (!choix) return;
+    const loader = document.querySelector(".loader");
+    if (new URLSearchParams(location.search).has("lang")) return choix.remove();
+    loader?.classList.add("choix-langue");
+    choix.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-lang]");
+      if (!b) return;
+      if (b.dataset.lang !== lang) return location.assign(vers(b.dataset.lang));
+      choix.remove();
+      loader?.classList.remove("choix-langue");
+      document.getElementById("enter")?.focus({ preventScroll: true });
+    });
   });
 
   if (lang !== "en") return;
@@ -54,10 +70,11 @@
     "Enzo Jacinto — La plongée": "Enzo Jacinto — The Dive",
     "Enzo Jacinto — Graphisme, audiovisuel, réseaux": "Enzo Jacinto — Graphic design, video, social media",
     "Plonger": "Dive in",
-    "ou entrer sans le son": "or enter without sound",
+    "Sans le son": "Without sound",
     "Son immersif · casque conseillé": "Immersive sound · headphones recommended",
     "Version lite": "Lite version",
     "Version lite ↗": "Lite version ↗",
+    "· sans 3D, plus rapide": "· no 3D, faster",
     "Son": "Sound",
     "Projets": "Projects",
     "À propos": "About",
@@ -80,8 +97,8 @@
     "Voir les travaux": "See my work",
     "Ce que": "What",
     "je fais.": "I do.",
-    "Un projet ?": "A project?",
-    "Parlons-en.": "Let's talk.",
+    "On travaille ensemble ?": "Shall we work together?",
+    "Écris-moi.": "Drop me a line.",
     "Haut de page ↑": "Back to top ↑",
     "Haut de page": "Back to top",
     "Année": "Year",

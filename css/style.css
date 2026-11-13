@@ -236,7 +236,7 @@ main, .foot { position: relative; z-index: 1; }
 }
 
 .preview {
-  --w: min(24vw, 340px);
+  --w: min(15vw, 210px);
   position: fixed;
   left: 0;
   top: 0;

@@ -23,14 +23,18 @@
 <body>
   <div class="loader">
     <div class="load">
+      <div class="load-langue" id="langue">
+        <span class="label">Choisis ta langue · Choose your language</span>
+        <div><button data-lang="fr" lang="fr">Français</button><button data-lang="en" lang="en">English</button></div>
+      </div>
       <div class="load-line"><i id="loader-bar"></i></div>
       <div class="load-go">
         <button class="load-enter" id="enter" disabled>Plonger</button>
-        <button class="load-mute" id="enter-mute" disabled>ou entrer sans le son</button>
+        <label class="load-mute"><input type="checkbox" id="enter-mute"> Sans le son</label>
       </div>
       <span class="label load-hint">Son immersif · casque conseillé</span>
     </div>
-    <a class="label load-lite" href="lite.html">Version lite</a>
+    <a class="label load-lite" href="lite.html">Version lite <span>· sans 3D, plus rapide</span></a>
   </div>
 
   <header class="bar">

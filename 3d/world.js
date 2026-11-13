@@ -66,8 +66,7 @@ function enter(withSound) {
   document.body.classList.add("loaded");
   loadedAt = performance.now();
 }
-$("#enter").addEventListener("click", () => enter(true));
-$("#enter-mute").addEventListener("click", () => enter(false));
+$("#enter").addEventListener("click", () => enter(!$("#enter-mute").checked));
 soundBtn.addEventListener("click", () => {
   if (Sound.on) Sound.stop();
   else soundOn();

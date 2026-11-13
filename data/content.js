@@ -1,10 +1,10 @@
 window.SITE = {
   name: "Enzo Jacinto",
-  status: "En recherche de stage (avril 2027)",
+  status: "En recherche de stage (avril – juin 2027)",
   city: "Béziers",
   timezone: "Europe/Paris",
 
-  intro: "Vidéaste et créateur multimédia : tournage, montage, post-production. Étudiant en BUT MMI à l'IUT de Béziers, je cherche un stage de 11 semaines à partir d'avril 2027.",
+  intro: "Vidéaste et créateur multimédia : tournage, montage, post-production. Étudiant en BUT MMI à l'IUT de Béziers, je cherche un stage de 11 semaines, du 5 avril au 18 juin 2027.",
 
   showreel: "",
 
@@ -88,14 +88,14 @@ window.SITE = {
     plongee: "Sous la surface, il y a des histoires.",
     roles: ["Monteur", "Vidéaste", "Graphiste"],
     about: "Du rush au récit.",
-    contact: "On lance la lecture ?",
+    contact: "On travaille ensemble ?",
     contactText: "Un stage, un projet, un clip à monter : écris-⁠moi.",
   },
 };
 
 window.SITE_EN = {
-  status: "Looking for an internship (April 2027)",
-  intro: "Video maker and multimedia creator: shooting, editing, post-production. I'm studying for a BUT MMI (multimedia and internet degree) at the IUT de Béziers, and I'm looking for an 11-week internship starting April 2027.",
+  status: "Looking for an internship (April – June 2027)",
+  intro: "Video maker and multimedia creator: shooting, editing, post-production. I'm studying for a BUT MMI (multimedia and internet degree) at the IUT de Béziers, and I'm looking for an 11-week internship from 5 April to 18 June 2027.",
   manifesto: "I tell *stories with images.* A poster that stops you in your tracks, a short film that stays in your head, a video people watch *all the way through.*",
   stats: [
     { label: "TikTok views", value: "3.8M" },
@@ -145,7 +145,7 @@ window.SITE_EN = {
     plongee: "Below the surface, there are stories.",
     roles: ["Editor", "Video maker", "Graphic designer"],
     about: "From raw footage to story.",
-    contact: "Shall we hit play?",
+    contact: "Shall we work together?",
     contactText: "An internship, a project, a clip to edit? Drop me a line.",
   },
 };
