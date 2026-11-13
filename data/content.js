@@ -79,7 +79,6 @@ window.SITE = {
 
   email: "enzojacinto.pro@gmail.com",
   socials: [
-    { label: "Instagram", url: "https://www.instagram.com/enzo.jct_/" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/enzo-jacinto" },
     { label: "GitHub", url: "https://github.com/Enzo-jct" },
   ],
