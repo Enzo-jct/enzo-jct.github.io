@@ -4,7 +4,7 @@
     if (lang === "fr" || lang === "en") localStorage.setItem("lang", lang);
     else lang = localStorage.getItem("lang");
   } catch (e) {}
-  if (lang !== "fr" && lang !== "en") lang = /^fr\b/i.test(navigator.language || "fr") ? "fr" : "en";
+  if (lang !== "en") lang = "fr";
   document.documentElement.lang = lang;
   const autre = lang === "fr" ? "en" : "fr";
 
@@ -34,19 +34,7 @@
     const style = document.createElement("style");
     style.textContent = ".lang-btn{color:var(--mute);text-decoration:none;transition:color .3s}.lang-btn:hover{color:var(--ink)}";
     document.head.append(style);
-    const choix = document.getElementById("langue");
-    if (!choix) return;
-    const loader = document.querySelector(".loader");
-    if (new URLSearchParams(location.search).has("lang")) return choix.remove();
-    loader?.classList.add("choix-langue");
-    choix.addEventListener("click", (e) => {
-      const b = e.target.closest("button[data-lang]");
-      if (!b) return;
-      if (b.dataset.lang !== lang) return location.assign(vers(b.dataset.lang));
-      choix.remove();
-      loader?.classList.remove("choix-langue");
-      document.getElementById("enter")?.focus({ preventScroll: true });
-    });
+    document.querySelector(".load-bas")?.append(lien(autre === "en" ? "English version" : "Version française", "label load-lite"));
   });
 
   if (lang !== "en") return;
