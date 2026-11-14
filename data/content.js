@@ -75,7 +75,7 @@ window.SITE = {
 
   tools: ["Premiere Pro", "After Effects", "DaVinci Resolve", "CapCut", "Photoshop", "Illustrator", "Figma", "InDesign", "WordPress"],
 
-  code: "Du vibe coding : assez pour suivre une équipe de devs et trouver des solutions avec elle.",
+  code: "Je code aussi. Je comprends ce que je fais et je parle le même langage qu'une équipe de devs.",
 
   email: "enzojacinto.pro@gmail.com",
   socials: [
@@ -139,7 +139,7 @@ window.SITE_EN = {
     { title: "Social media", text: "Community management and content that rides the trends, from the idea to the performance analysis." },
     { title: "Graphic design & art direction", text: "Art direction and the visuals that go with the videos, in Photoshop, Illustrator and Figma." },
   ],
-  code: "Some vibe coding: enough to keep up with a dev team and work out solutions with them.",
+  code: "I code too. I understand what I'm doing and I speak the same language as a dev team.",
   v3d: {
     plongee: "Below the surface, there are stories.",
     roles: ["Editor", "Video maker", "Graphic designer"],
