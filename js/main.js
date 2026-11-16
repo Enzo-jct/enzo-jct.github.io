@@ -51,7 +51,7 @@ addEventListener("scroll", () => requestAnimationFrame(lightWords), { passive: t
 lightWords();
 
 $("#stats").innerHTML = S.stats.map((s, i) =>
-  `<li class="fade"><span class="label">${esc(s.label)}</span><strong>${esc(s.value)}</strong><span class="idx">[${pad(i + 1)}]</span></li>`).join("");
+  `<li class="fade"><span class="label">${esc(s.label)}</span><strong>${esc(s.value)}</strong></li>`).join("");
 
 const ytId = (u) => String(u ?? "").match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)?.[1];
 const thumbOf = (p) => p.thumb || (ytId(p.video) ? `https://i.ytimg.com/vi/${ytId(p.video)}/hqdefault.jpg` : "");

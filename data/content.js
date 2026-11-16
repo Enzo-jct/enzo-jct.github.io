@@ -8,13 +8,13 @@ window.SITE = {
 
   showreel: "",
 
-  manifesto: "Je raconte des *histoires avec des images.* Une affiche qui arrête le regard, un court métrage qui reste en tête, une vidéo qu'on regarde *jusqu'au bout.*",
+  manifesto: "Je fais de la vidéo depuis mes 16 ans, du tournage au montage. Mon truc, c'est de trouver *le bon rythme* pour qu'on regarde *jusqu'au bout.*",
 
   stats: [
     { label: "Vues sur TikTok", value: "3,8M" },
     { label: "Likes en 4 mois", value: "450k" },
-    { label: "Prix remportés", value: "02" },
-    { label: "Langues parlées", value: "03" },
+    { label: "Prix remportés", value: "2" },
+    { label: "Langues parlées", value: "3" },
   ],
 
   categories: { graphisme: "Graphisme", audiovisuel: "Audiovisuel", reseaux: "Réseaux", jeu: "Jeu vidéo" },
@@ -95,7 +95,7 @@ window.SITE = {
 window.SITE_EN = {
   status: "Looking for an internship (April – June 2027)",
   intro: "Video maker and multimedia creator: shooting, editing, post-production. I'm studying for a BUT MMI (multimedia and internet degree) at the IUT de Béziers, and I'm looking for an 11-week internship from 5 April to 18 June 2027.",
-  manifesto: "I tell *stories with images.* A poster that stops you in your tracks, a short film that stays in your head, a video people watch *all the way through.*",
+  manifesto: "I've been making videos since I was 16, from shooting to editing. My thing is finding *the right rhythm* so people watch *all the way through.*",
   stats: [
     { label: "TikTok views", value: "3.8M" },
     { label: "Likes in 4 months" },
