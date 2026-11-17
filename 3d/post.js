@@ -139,6 +139,22 @@ export function buildPost(renderer, camera, time) {
       shaftRT.setSize(Math.ceil(size.x / 4), Math.ceil(size.y / 4));
       u.uAspect.value = shafts.material.uniforms.uAspect.value = size.x / size.y;
     },
+    warm(scene) {
+      const plane = new THREE.PlaneGeometry(2, 2);
+      const done = [[scene, sceneRT], [caustics, causticRT], [shafts, shaftRT], [comp, null]].map(([o, rt]) => {
+        renderer.setRenderTarget(rt);
+        return renderer.compileAsync(o.isObject3D ? o : new THREE.Mesh(plane, o.material), camera);
+      });
+      renderer.setRenderTarget(null);
+      scene.traverse((o) => {
+        for (const m of [].concat(o.material ?? [])) {
+          for (const v of [...Object.values(m), ...Object.values(m.uniforms ?? {}).map((x) => x?.value)]) {
+            if (v?.isTexture && !v.isRenderTargetTexture) renderer.initTexture(v);
+          }
+        }
+      });
+      return Promise.all(done);
+    },
     render(scene) {
       const under = u.uUnder.value > 0.5;
       if (under) {

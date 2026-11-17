@@ -95,19 +95,14 @@ try {
 }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
 renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.debug.checkShaderErrors = false;
 renderer.domElement.className = "gl";
 document.body.prepend(renderer.domElement);
 addEventListener("pagehide", () => renderer.forceContextLoss());
 addEventListener("pageshow", (e) => e.persisted && location.reload());
-await Promise.all(['italic 400 100px "Instrument Serif"', "800 100px Archivo", "700 100px Archivo", "600 100px Archivo", "500 100px Archivo"].map((f) => document.fonts.load(f).catch(() => {})));
+const fonts = Promise.all(['italic 400 100px "Instrument Serif"', "800 100px Archivo", "700 100px Archivo", "600 100px Archivo", "500 100px Archivo"].map((f) => document.fonts.load(f).catch(() => {})));
 
-const scene = new THREE.Scene();
-const time = { value: 0 };
-const Sky = buildSky();
-const Ocean = buildOcean(scene, renderer, time, Sky);
-const camera = new THREE.PerspectiveCamera(mobile ? 55 : 35, 1, 0.05, 1200);
-
-const card = (num, title, sub) => paint(1600, 900, (g, W, H) => {
+const card =(num, title, sub) => paint(1600, 900, (g, W, H) => {
   const bg = g.createRadialGradient(W / 2, H * 0.42, 0, W / 2, H * 0.42, W * 0.6);
   bg.addColorStop(0, "#3b3036");
   bg.addColorStop(1, "#0f0f12");
@@ -138,14 +133,36 @@ async function picture(p, i) {
       return { map: t, img: t.image, aspect: t.image.width / t.image.height };
     } catch {}
   }
-  const map = card(pad(i + 1), p.title, `${S.categories[p.category]} / ${p.year}`);
+  await fonts;
+  return placeholder(i);
+}
+function placeholder(i) {
+  const p = P[i], map = card(pad(i + 1), p.title, `${S.categories[p.category]} / ${p.year}`);
   return { map, img: map.image, aspect: 16 / 9 };
 }
-const pics = await Promise.all(P.map(picture));
+const picsP = P.map(picture);
+await fonts;
+
+const scene = new THREE.Scene();
+const time = { value: 0 };
+const Sky = buildSky();
+const Ocean = buildOcean(scene, renderer, time, Sky);
+const camera = new THREE.PerspectiveCamera(mobile ? 55 : 35, 1, 0.05, 1200);
+const late = [];
+const pics = await Promise.all(picsP.map((p, i) => Promise.race([p, new Promise((r) => setTimeout(r, 1200))]).then((v) => v ?? (late.push(i), placeholder(i)))));
 
 const W0 = 2;
 let list = P.map((_, i) => i), AB = W0 + P.length, CT = AB + 1;
 const M = buildMontage(scene, S, pics, time, W0);
+for (const i of late) {
+  picsP[i].then((v) => {
+    const old = pics[i].map;
+    pics[i] = v;
+    renderer.initTexture(v.map);
+    M.refresh(i);
+    old.dispose();
+  });
+}
 M.root.position.set(3, -4.6, 0);
 M.root.rotation.z = -0.2;
 M.viewer.rotation.z = 0.2;
@@ -479,11 +496,11 @@ function frame(now) {
   }
   railLinks.forEach((a, j) => a.classList.toggle("on", j === st.ch));
 
-  post.render(scene);
+  if (ready) post.render(scene);
 }
 prevCam.copy(camPos[0]);
 requestAnimationFrame(frame);
 document.body.classList.add("has-scene");
 Ocean.update(camera, false, 0);
-await Promise.all([minTime, renderer.compileAsync(scene, camera)]);
+await Promise.all([minTime, post.warm(scene)]);
 ready = true;

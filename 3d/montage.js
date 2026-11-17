@@ -237,6 +237,10 @@ export function buildMontage(scene, S, pics, time, W0) {
     const outline = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry), new THREE.LineBasicMaterial({ color: 0xff5a36, transparent: true, opacity: 0 }));
     m.add(outline);
     m.userData.outline = outline;
+    m.userData.redo = () => {
+      top.map.dispose();
+      top.map = top.emissiveMap = clipFace(c, len, depth, pics, gen, r);
+    };
     projClips.push(m);
   }
   const X0 = -3.5, full = end * SEC - X0;
@@ -397,6 +401,12 @@ export function buildMontage(scene, S, pics, time, W0) {
   const plugAt = new THREE.Vector3();
   return {
     root, viewer, projX, endX: end * SEC, screen, projClips,
+    refresh(i) {
+      for (const m of projClips) if (m.userData.project === i) m.userData.redo();
+      if (shown !== i) return;
+      screen.material.uniforms.uMap.value = pics[i].map;
+      screen.material.uniforms.uCover.value = cover(pics[i].aspect);
+    },
     leaks: [new THREE.Vector3(devX + 2, 0.05, devZ + devD / 2 - 0.25), new THREE.Vector3(devX + devL - 0.6, 0.05, devZ + devD / 2 - 0.3)],
     plugTo: null,
     setList(l) {
